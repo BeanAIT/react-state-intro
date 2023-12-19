@@ -1,4 +1,4 @@
-import './App.css';
+import './Pocitadlo.css';
 import Pocitadlo from './Pocitadlo';
 import PocitadloABarva from './PocitadloABarva';
 
