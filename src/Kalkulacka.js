@@ -1,25 +1,63 @@
+
+import { useState } from "react";
 import CiselneTlacitko from "./CiselneTlacitko";
-
+import './Kalkulacka.css';
 function Kalkulacka() {
-return (
-    <div>
-<CiselneTlacitko cislo={7}/>
-<CiselneTlacitko cislo={8}/>
-<CiselneTlacitko cislo={9} />
-<br/>
-<CiselneTlacitko cislo={4}/>
-<CiselneTlacitko cislo={5}/>
-<CiselneTlacitko cislo={6}/>
-<br/>
-<CiselneTlacitko cislo={1}/>
-<CiselneTlacitko cislo={2}/>
-<CiselneTlacitko cislo={3}/>
-<br/>
-<CiselneTlacitko cislo={0}/>
+
+    const [cislo, nastavCislo] = useState("0");
+    const [operace, nastavOperaci] = useState("");
+    const [prvniCislo, nastavPrvniCislo] = useState(0);
+
+function vybranaOperace(symbol) {
+    nastavOperaci(symbol)
+    nastavPrvniCislo(cislo)
+    nastavCislo("0")
+}
+
+    function spocitejVysledek() {
+       let vysledek
+       let prvniCisloNum = parseInt(prvniCislo)
+        if (operace == "+") {
+vysledek = prvniCisloNum + cislo
+        } else if (operace == "-") {
+            vysledek = prvniCisloNum - cislo
+        } else if (operace == "*") {
+            vysledek = prvniCisloNum * cislo
+        } else if (operace == "/") {
+            vysledek = prvniCisloNum / cislo
+        }
+        nastavCislo(vysledek)
+    }
+    return (
+        <>
+            <div id="kalkulacka">
+                <div id="displej">{cislo}</div>
+                <div id="tlacitka">
+                    <CiselneTlacitko cislo={7} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={8} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={9} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <button onClick={() => vybranaOperace("+")}>+</button>
+                    <br />
+                    <CiselneTlacitko cislo={4} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={5} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={6} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <button onClick={() => vybranaOperace("-")}>-</button>
+                    <br />
+                    <CiselneTlacitko cislo={1} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={2} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <CiselneTlacitko cislo={3} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <button onClick={() => vybranaOperace("*")}>*</button>
+                    <br />
+                    <button onClick={() => nastavOperaci("C")}>C</button>
+                    <CiselneTlacitko cislo={0} klikFunkce={nastavCislo} puvodniCislo={cislo}/>
+                    <button onClick={() => nastavOperaci("=")}>=</button>
+                    <button onClick={() => vybranaOperace("/")}>/</button>
 
 
-    </div>
-)
+                </div>
+            </div>
+        </>
+    )
 
 }
 
